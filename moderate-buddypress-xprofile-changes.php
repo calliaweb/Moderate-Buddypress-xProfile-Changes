@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Moderate Buddypress xProfile Changes
- * Plugin URI:
+ * Plugin URI: https://github.com/calliaweb/Moderate-Buddypress-xProfile-Changes/
  * Description: Moderate BuddyPress xProfile changes using visibility levels.
  * Author: Jo Waltham at Callia Web
  * Author URI: https://www.calliaweb.co.uk
