@@ -34,13 +34,15 @@ add_action( 'xprofile_updated_profile', 'jmw_buddypress_profile_update', 10, 5 )
  * Email site admin that profile has been updated.
  * Fires after all XProfile fields have been saved for the current profile.
  *
- * @param int   $user_id           Displayed user ID.
+ * @param int   $user_id          Displayed user ID.
  * @param array $posted_field_ids Array of field IDs that were edited.
  * @param bool  $errors           Whether or not any errors occurred.
  * @param array $old_values       Array of original values before updated.
  * @param array $new_values       Array of newly saved values after update.
  *
  * @since 0.0.1
+ *
+ * TO DO: Do not email when admin updates profile.
  */
 function jmw_buddypress_profile_update( $user_id, $posted_field_ids, $errors, $old_values, $new_values ) {
 
@@ -78,7 +80,7 @@ function jmw_customize_profile_visibility( $allowed_visibilities ) {
 
 add_filter( 'bp_xprofile_get_hidden_field_types_for_user', 'jmw_get_hidden_visibility_types_for_user', 10, 3 );
 /**
- * Set our moderated visibility level to hidden to all but super admin.
+ * Set our moderated visibility level to hidden to all but admin.
  *
  * @param array $hidden_fields     Array of hidden fields for the displayed/logged in user.
  * @param int   $displayed_user_id ID of the displayed user.
@@ -87,7 +89,7 @@ add_filter( 'bp_xprofile_get_hidden_field_types_for_user', 'jmw_get_hidden_visib
  */
 function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_user_id, $current_user_id ) {
 
-	if( ! is_super_admin() ) {
+	if( ! current_user_can( 'manage_options' ) ) {
 		$hidden_levels[] = 'moderated';
 	}
 
@@ -112,7 +114,7 @@ function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_us
  		return $retval;
  	}
 
- 	if( is_super_admin() ) {
+ 	if( current_user_can( 'manage_options' ) ) {
  		$retval = true;
  	}
  	else {
@@ -136,7 +138,7 @@ add_action( 'xprofile_profile_field_data_updated', 'jmw_moderate_profile_field_d
  */
 function jmw_moderate_profile_field_data( $field_id, $value ) {
 
-	if( is_super_admin() ) {
+	if( current_user_can( 'manage_options' ) ) {
 		$field = xprofile_get_field( $field_id );
 		$visibility_level = $field->default_visibility;
 	} else {
