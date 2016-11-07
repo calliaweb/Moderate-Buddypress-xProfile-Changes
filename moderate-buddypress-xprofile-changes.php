@@ -85,6 +85,7 @@ add_filter( 'bp_xprofile_get_hidden_field_types_for_user', 'jmw_get_hidden_visib
  * @param array $hidden_fields     Array of hidden fields for the displayed/logged in user.
  * @param int   $displayed_user_id ID of the displayed user.
  * @param int   $current_user_id   ID of the current user.
+ *
  * @since 0.0.1
  */
 function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_user_id, $current_user_id ) {
