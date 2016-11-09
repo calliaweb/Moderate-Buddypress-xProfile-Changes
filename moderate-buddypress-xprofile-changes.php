@@ -45,6 +45,11 @@ add_action( 'xprofile_updated_profile', 'jmw_buddypress_profile_update', 10, 5 )
  * TO DO: Do not email when admin updates profile.
  */
 function jmw_buddypress_profile_update( $user_id, $posted_field_ids, $errors, $old_values, $new_values ) {
+	
+	if( current_user_can( 'manage_options' ) ) {
+		// If administrator is making the changes don't email
+		return;
+	}
 
     $message_subject = sprintf( '%s: Profile moderation required for %s',
     	esc_html( get_bloginfo( 'name' ) ),
