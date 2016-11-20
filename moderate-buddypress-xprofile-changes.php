@@ -103,7 +103,7 @@ function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_us
 
 }
 
- add_filter( 'bp_current_user_can', 'jmw_permit_admin_to_edit_field_visibility', 10, 4 );
+// add_filter( 'bp_current_user_can', 'jmw_permit_admin_to_edit_field_visibility', 10, 4 );
 /**
  * Override custom visibility setting.
  *
