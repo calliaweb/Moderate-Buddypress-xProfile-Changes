@@ -50,10 +50,13 @@ Not at this time
 Not at this time
 
 ### Users cannot alter their profile field visibility even though 'Allow members to override' is set
-This is by design. After moderation, this plugin resets the profile field visibility back to the field defaults which would overwrite a user's custom setting.
+This is by design. After moderation, this plugin resets the profile field visibility back to the field defaults which would overwrite a user's custom setting. Therefore the option for users to default a custom visibilty is removed.
 
 
 ## Changelog
+
+### 0.0.2
+* Remove the override on visibility capability as this stops the default field visibility being set on new user registration. Replace with the removal of the profile visibility setting page on user profiles.
 
 ### 0.0.1
 * initial release on GH
