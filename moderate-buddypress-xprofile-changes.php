@@ -5,7 +5,7 @@
  * Description: Moderate BuddyPress xProfile changes using visibility levels.
  * Author: Jo Waltham at Callia Web
  * Author URI: https://www.calliaweb.co.uk
- * Version: 0.0.1
+ * Version: 0.0.2
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -106,6 +106,7 @@ function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_us
 // add_filter( 'bp_current_user_can', 'jmw_permit_admin_to_edit_field_visibility', 10, 4 );
 /**
  * Override custom visibility setting.
+ * REMOVED BECAUSE IT STOPS THE DEFAULT PROFILE FIELD VISISBILITY BEING SET ON USER REGISTRATION
  *
  * @param bool   $retval     Whether or not the current user has the capability.
  * @param string $capability The capability being checked for.
@@ -129,6 +130,18 @@ function jmw_get_hidden_visibility_types_for_user( $hidden_levels, $displayed_us
 
  	return $retval;
  }
+
+add_action( 'bp_actions', 'jmw_remove_profile_subnav_item' );
+/**
+ * Remove profile visibility settings menu item on user profiles
+ *
+ * Fires just before rendering.
+ *
+ * @since 0.0.2
+ */
+function jmw_remove_profile_subnav_item() {
+	bp_core_remove_subnav_item( BP_SETTINGS_SLUG, 'profile' );
+}
 
 add_action( 'xprofile_profile_field_data_updated', 'jmw_moderate_profile_field_data', 10, 2 );
 /**
